@@ -1,0 +1,61 @@
+# =============================================================================
+#   ai4earthquake :: configs
+# =============================================================================
+#   Module       :: kilauea.yaml -- configuration of kilauea
+#   Author       :: Chong Liu (c.liu3@uu.nl)
+#   Affiliation  :: Utrecht University
+#   Date         :: November 2026
+# =============================================================================
+# Kīlauea 2018 caldera-collapse sequence: seismometer RIMD (HHN) -> GNSS station CRIM
+system: kilauea
+label: "Kīlauea (2018 collapse sequence)"
+target_name: displacement_mm
+sampling_rate_hz: 100
+recurrence_s: 51840               # mean collapse interval T = 14.4 h
+
+paths:
+  raw: data/raw/kilauea           # outputs of the Johnson & Johnson (2024) preprocessing
+  outputs: outputs
+
+raw:
+  kind: kilauea
+  seismic_h5: RIMD_01_50.h5       # 100-Hz velocity, components HHE/HHN/HHZ
+  component: HHN
+  displacement_parquet:           # CRIM detrended horizontal displacement
+    - GPS_highrate/CRIM_0_HI.parquet
+    - GPS_highrate/CRIM_1_HI.parquet
+  start: "2018-06-01"
+  end: "2018-08-05 23:59:59"
+
+window: 3000                      # W = 30 s
+skip_rows: 3000                   # the reference run dropped the first W rows
+
+embedding:
+  S: 2900                         # 29 s
+  D: 425                          # L = 3.42 h
+  n_pca: 3
+  n_umap: 2
+  n_neighbors: 200
+  min_dist: 0.01
+  umap_random_state: null         # the reference run did not seed UMAP
+  pca_random_state: 0
+
+split:
+  kind: date
+  start: "2018-06-01"
+  train_end: "2018-07-23"         # train before, test from 23 July 00:00 UTC
+  end: "2018-08-03"
+
+model:
+  n_estimators: 300
+  n_iter: 25
+  cv: 3
+  random_state: 0
+  search_random_state: 0
+  feature_order: field
+  backend: darts
+
+explain:
+  shap_rows: train                # SHAP over the training rows only
+  shap_decimation: 2              # every second row
+  n_jets: 8

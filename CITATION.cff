@@ -1,0 +1,67 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "Code for 'From waveforms to fault state across scales with explainable AI'"
+type: software
+version: 1.0.0
+date-released: 2026-11-11
+license: MIT
+repository-code: "https://github.com/chongliu93/ai4earthquake"
+authors:
+  - family-names: Liu
+    given-names: Chong
+    affiliation: "Department of Earth Sciences, Utrecht University"
+    email: c.liu3@uu.nl
+    orcid: "https://orcid.org/0000-0002-0091-0130"
+  - family-names: Elbertsen
+    given-names: Rens
+    affiliation: "Department of Earth Sciences, Utrecht University"
+  - family-names: Vasconcelos
+    given-names: Ivan
+    affiliation: "Shearwater GeoServices"
+  - family-names: Hu
+    given-names: Manman
+    affiliation: "Department of Civil Engineering, Zhejiang University"
+  - family-names: Regenauer-Lieb
+    given-names: Klaus
+    affiliation: "Curtin University"
+  - family-names: Niemeijer
+    given-names: André
+    affiliation: "Department of Earth Sciences, Utrecht University"
+references:
+  - type: dataset
+    title: "Processed data for 'From waveforms to fault state across scales with explainable AI'"
+    authors:
+      - family-names: Liu
+        given-names: Chong
+      - family-names: Elbertsen
+        given-names: Rens
+      - family-names: Vasconcelos
+        given-names: Ivan
+      - family-names: Hu
+        given-names: Manman
+      - family-names: Regenauer-Lieb
+        given-names: Klaus
+      - family-names: Niemeijer
+        given-names: André
+    publisher:
+      name: "Utrecht University (Yoda)"
+    doi: "10.24416/UU01-Y5MLH1"
+    license: CC-BY-4.0
+preferred-citation:
+  type: unpublished
+  title: "From waveforms to fault state across scales with explainable AI"
+  authors:
+    - family-names: Liu
+      given-names: Chong
+    - family-names: Elbertsen
+      given-names: Rens
+    - family-names: Vasconcelos
+      given-names: Ivan
+    - family-names: Hu
+      given-names: Manman
+    - family-names: Regenauer-Lieb
+      given-names: Klaus
+    - family-names: Niemeijer
+      given-names: André
+  status: submitted
+  year: 2026

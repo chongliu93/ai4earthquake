@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "labquake"
+version = "1.0.0"
+description = "Code for 'From waveforms to fault state across scales with explainable AI'"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [{name = "Chong Liu", email = "c.liu3@uu.nl"}]
+dependencies = [
+  "numpy>=1.26,<2",
+  "pandas>=2.2",
+  "scipy>=1.13",
+  "scikit-learn>=1.6,<1.7",
+  "h5py>=3.14",
+  "pyyaml>=6",
+  "darts==0.37.1",
+  "umap-learn==0.5.12",
+  "shap==0.49.1",
+  "scikit-optimize>=0.10",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

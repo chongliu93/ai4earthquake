@@ -1,0 +1,59 @@
+# =============================================================================
+#   ai4earthquake :: configs
+# =============================================================================
+#   Module       :: p5198.yaml -- configuration of p5198
+#   Author       :: Chong Liu (c.liu3@uu.nl)
+#   Affiliation  :: Utrecht University
+#   Date         :: November 2026
+# =============================================================================
+# p5198: quartz-powder gouge, Penn State double-direct shear (Supplementary Table 1 of the paper)
+system: p5198
+label: "p5198 (quartz powder)"
+target_name: shear_stress_MPa
+sampling_rate_hz: 3.82e6          # effective AE sampling rate (nominal 4 MHz)
+recurrence_s: 6.44                # mean stick-slip interval T
+
+paths:
+  raw: data/raw/p5198             # the Penn State files of the experiment
+  outputs: outputs
+
+raw:                              # stage 0: which part of the archive to read
+  kind: pennstate
+  start_s: 6600
+  end_s: 6900
+  channel: 0                      # AE channel index in the .ac files
+  ac_dir: run1                    # folder of the WF_<n>.ac files, inside paths.raw
+  time_vector_file: AcTimeVector_p5198.mat
+  settings_file: p5198_AE_run1.mat
+  mechanical_file: p5198_data.txt
+
+window: 1272000                   # W, samples (0.333 s)
+skip_rows: nan                    # drop the W-1 rows without a statistic
+
+embedding:
+  S: 100000                       # stride, samples (26.2 ms)
+  D: 250                          # delay taps; L = W + (D-1)S = 6.86 s
+  n_pca: 3
+  n_umap: 2
+  n_neighbors: 200
+  min_dist: 0.01
+  umap_random_state: 0
+  pca_random_state: 0
+
+split:
+  kind: fraction
+  test_fraction: 0.2              # last 20 % of the rows is the test segment
+
+model:
+  n_estimators: 1000
+  n_iter: 25                      # BayesSearchCV iterations
+  cv: 3
+  random_state: 0
+  search_random_state: null       # the laboratory searches were not seeded
+  feature_order: lab
+  backend: darts
+
+explain:
+  shap_rows: all                  # SHAP over the whole record (train + test)
+  shap_decimation: 1
+  n_jets: 8

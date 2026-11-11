@@ -1,0 +1,59 @@
+# =============================================================================
+#   ai4earthquake :: configs
+# =============================================================================
+#   Module       :: p4581.yaml -- configuration of p4581
+#   Author       :: Chong Liu (c.liu3@uu.nl)
+#   Affiliation  :: Utrecht University
+#   Date         :: November 2026
+# =============================================================================
+# p4581: glass-bead gouge, Penn State double-direct shear (Supplementary Table 1 of the paper)
+system: p4581
+label: "p4581 (glass beads)"
+target_name: shear_stress_MPa
+sampling_rate_hz: 3.92e6          # effective AE sampling rate (nominal 4 MHz)
+recurrence_s: 9.27                # mean stick-slip interval T
+
+paths:
+  raw: data/raw/p4581
+  outputs: outputs
+
+raw:
+  kind: pennstate
+  start_s: 3816
+  end_s: 4083
+  channel: 0
+  ac_dir: run1
+  time_vector_file: ACTimeVector_4581.mat
+  settings_file: p4581_AE.mat
+  mechanical_file: p4581_data.txt
+
+window: 10000000                  # W, samples (2.55 s)
+skip_rows: nan
+
+embedding:
+  S: 100000                       # 25.5 ms
+  D: 200                          # L = 7.62 s
+  n_pca: 3
+  n_umap: 2
+  n_neighbors: 200
+  min_dist: 0.01
+  umap_random_state: 0
+  pca_random_state: 0
+
+split:
+  kind: fraction
+  test_fraction: 0.2
+
+model:
+  n_estimators: 1000
+  n_iter: 25
+  cv: 3
+  random_state: 0
+  search_random_state: null
+  feature_order: lab
+  backend: darts
+
+explain:
+  shap_rows: all
+  shap_decimation: 1
+  n_jets: 8

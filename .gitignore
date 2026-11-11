@@ -1,0 +1,23 @@
+# data and results never enter the repository
+data/
+outputs/
+*.hdf5
+*.h5
+*.npz
+*.npy
+*.pkl
+*.joblib
+
+# python
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# editors and OS
+.vscode/
+.idea/
+.DS_Store
